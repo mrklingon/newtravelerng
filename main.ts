@@ -67,7 +67,13 @@ function getval (xx2: number, yy2: number) {
     }
     return cosmos[spot]
 }
+input.onButtonPressed(Button.AB, function () {
+    for (let index = 0; index <= 4; index++) {
+        led.plot(x + index * dx[lastdir], y + index * dy[lastdir])
+    }
+})
 let move = 0
+let lastdir = 0
 let spot = 0
 let dir2 = 0
 let dy: number[] = []
@@ -86,6 +92,9 @@ basic.forever(function () {
 basic.forever(function () {
     led.unplot(x, y)
     move = findDir()
+    if (move != 0) {
+        lastdir = move
+    }
     x += dx[move]
     y += dy[move]
     if (x < 0) {
